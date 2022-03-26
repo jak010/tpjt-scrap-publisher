@@ -41,13 +41,11 @@ USE_TZ = True
 # INSTALLED_APPS
 DEVELOP_APPS = [
     'django_extensions',
-    'accounts',
-    'products',
+    'apps',
 
 ]
 
 INSTALLED_APPS = INSTALLED_APPS + DEVELOP_APPS
-
 
 # SQL LOGGING
 LOGGING = {
