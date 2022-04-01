@@ -1,6 +1,6 @@
 # Django Template Repository
 
-- Date: 2022.03.27
+- `Last Update`: 2022.04.01
 
 ## TOC
 
@@ -16,9 +16,12 @@
 
 - `apps`
     - `apps` 디렉토리는 django의 app을 다루기 위해서 만듬
-    - app 단위로 쪼개서 관리하는 방법이 제일 좋다고 하는데 필요하면 쪼개서 사용해도 상관 x
+    - `app` 다루기
+      - django의 app은 작은 단위로 쪼개서 만드는 것이 좋음
+      - 본 프로젝트의 컨셉은 `apps 디렉토리` 안에서 모든 app 을 관리하도록 구성함
+      - 사용하려는 프로젝트의 컨셉에 맞게 app 구조를 변경해도 상관없음
 - `config`
-    - django project 환경설정 파일
+    - `django project` 환경설정 파일
         - `setting`의 디렉토리에 `local`만 만들어 둠
             - `local` 에 포함된 내용
                 - DATABASE
