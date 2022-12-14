@@ -6,6 +6,7 @@ from django.http.response import JsonResponse
 
 # Create your views here.
 
+
 class GreetingView(View):
 
     def get(self, request):
