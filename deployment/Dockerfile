@@ -1,8 +1,7 @@
-FROM mysql:5.7
+FROM mysql:5.7-debian
 
 ENV MYSQL_ROOT_PASSWORD=1234
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
 RUN apt update
 RUN apt install -y wget unzip
 
