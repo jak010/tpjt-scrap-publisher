@@ -1,6 +1,8 @@
 from django.views.generic import View
 from django.http import JsonResponse
 
+from django.db import IntegrityError
+
 from ..auth import Member
 
 
@@ -10,10 +12,20 @@ class MemberCreateView(View):
         email = self.request.POST.get("email", None)
         password = self.request.POST.get('password', None)
 
-        new_member = Member(
-            email=email,
-            password=password
-        )
-        new_member.save()
+        try:
+            new_member = Member(
+                email=email,
+                password=password
+            )
+            new_member.save()
+        except IntegrityError:
+            return JsonResponse(
+                status=400,
+                data={
+                    "desg": "Already Exists Member"
+                }
+            )
 
-        return JsonResponse(data={})
+        return JsonResponse(status=201, data={
+            "member_id": new_member.id
+        })
