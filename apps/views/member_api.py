@@ -15,7 +15,7 @@ class MemberCreateView(View):
         try:
             new_member = Member(
                 email=email,
-                password=password
+                password=password  # TODO: passwod 저장할 떄 암호화 적용하기
             )
             new_member.save()
         except IntegrityError:
@@ -29,6 +29,3 @@ class MemberCreateView(View):
         return JsonResponse(status=201, data={
             "member_id": new_member.id
         })
-
-
-

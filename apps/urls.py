@@ -4,7 +4,8 @@ from django.urls import path
 
 from .views import (
     member_api,
-    email_send_api
+    email_send_api,
+    article_scrap_api
 )
 
 urlpatterns = [
@@ -13,5 +14,8 @@ urlpatterns = [
     path("member", member_api.MemberCreateView.as_view()),
 
     # Email Sender
-    path("email/send", email_send_api.EmailSendView.as_view())
+    path("email/send", email_send_api.EmailSendView.as_view()),
+
+    # Article Scrapper
+    path("article/scrap", article_scrap_api.ArticleTistoryView.as_view())
 ]
