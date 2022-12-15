@@ -29,3 +29,6 @@ class MemberCreateView(View):
         return JsonResponse(status=201, data={
             "member_id": new_member.id
         })
+
+
+
