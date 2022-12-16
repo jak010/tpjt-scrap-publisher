@@ -9,6 +9,20 @@ from ..orm import Member
 
 class GroupView(View):
 
+    def get(self, *args, **kwargs):
+        """ 그룹 목록 조회하기 """
+        all_group = Group.objects.all()
+
+        items = [{
+            'group_id': group.id,
+            'group_name': group.name
+        } for group in all_group]
+
+        return JsonResponse(
+            status=200,
+            data={'items': items}
+        )
+
     def post(self, *args, **kwargs):
         """ 그룹 생성하기 """
         group_name = self.request.POST.get('group_name', None)
@@ -31,6 +45,23 @@ class GroupView(View):
                 'group_name': new_group.name
             }
         )
+
+
+class GroupDetailView(View):
+    def get(self, *args, **kwargs):
+        """ Group 정보 가져오기 """
+        group_id = int(self.kwargs['group_id'])
+
+        group = Group.objects.get(id=group_id)
+
+        return JsonResponse(status=200, data={
+            'group_id': group.id,
+            'group_name': group.name,
+            'member': [{
+                'member_id': member.id,
+                'email': member.email
+            } for member in group.user_set.all()]
+        })
 
 
 class GroupMemberView(View):
