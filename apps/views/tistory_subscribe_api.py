@@ -3,7 +3,7 @@ from django.http.response import JsonResponse
 from django.contrib.auth.models import Group
 
 from ..orm import TistoryModel
-from ..libs.rss_requstor.tistory_rss import TistoryRss, TistoryRssData
+from libs.rss_requstor.tistory_rss import TistoryRss, TistoryRssData
 
 
 class TistoryScrapView(View):
