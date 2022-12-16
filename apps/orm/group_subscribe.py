@@ -23,7 +23,8 @@ class GroupSubScribe(models.Model):
 
     objects = models.Manager()
 
-    def get_url(self):
+    @property
+    def url(self):
         return "https://" + \
                str(self.sub_domain) + "." + \
                str(self.domain) + "." + \
