@@ -1,10 +1,10 @@
 # from django.conf.urls import url  # django 4.x 버전 부터는 deprecated 처리
 
-from django.urls import path, re_path
+from django.urls import path
 
+from .views import groups
 from .views import (
     member_api,
-    group_api,
     email_send_api,
     tistory_subscribe_api,
     sample_view
@@ -23,9 +23,10 @@ urlpatterns = [
     path("email/send", email_send_api.EmailSendView.as_view()),
 
     # Group View
-    path("group", group_api.GroupView.as_view()),
-    path("group/member", group_api.GroupMemberView.as_view()),
-    path("group/<int:group_id>", group_api.GroupDetailView.as_view()),
+    path("group/list", groups.GroupListView.as_view()),
+    path("group/create", groups.GroupCreateView.as_view()),
+    path("group/<int:group_id>", groups.GroupDetailView.as_view()),
+    path("group/<int:group_id>/member", groups.GroupMemberJoinView.as_view()),
 
     # SubScribeView
     path("subscribe/tistory", tistory_subscribe_api.TistorySubscribeView.as_view()),
