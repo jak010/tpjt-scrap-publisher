@@ -3,7 +3,7 @@ from django.http import JsonResponse
 
 from django.db import IntegrityError
 
-from ..auth import Member
+from ..orm import Member
 
 
 class MemberCreateView(View):

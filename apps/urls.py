@@ -17,5 +17,5 @@ urlpatterns = [
     path("email/send", email_send_api.EmailSendView.as_view()),
 
     # Article Scrapper
-    path("article/scrap", article_scrap_api.ArticleTistoryView.as_view())
+    # path("article/scrap", article_scrap_api.ArticleTistoryView.as_view())
 ]

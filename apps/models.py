@@ -1,4 +1,7 @@
-from .orm import *
+from .orm import (
+    Member,
+    TistoryModel
+)
 
 from django.contrib.auth import get_user_model
 from django.db import models

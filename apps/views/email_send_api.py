@@ -2,7 +2,7 @@ from django.views import View
 from django.http.response import JsonResponse
 
 from ..models import EmailHistory
-from ..auth import Member
+from ..orm import Member
 
 
 class EmailSendView(View):
