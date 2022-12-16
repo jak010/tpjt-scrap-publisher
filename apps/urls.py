@@ -6,7 +6,7 @@ from .views import (
     member_api,
     group_api,
     email_send_api,
-    article_scrap_api
+    tistory_subscribe_api
 )
 
 urlpatterns = [
@@ -19,11 +19,11 @@ urlpatterns = [
     # Email Sender
     path("email/send", email_send_api.EmailSendView.as_view()),
 
-    # Article Scrapper
-    # path("article/scrap", article_scrap_api.ArticleTistoryView.as_view())
-    path("article/tistory", article_scrap_api.TistoryScrapView.as_view()),
-
     # Group View
     path("group", group_api.GroupView.as_view()),
-    path("group/member", group_api.GroupMemberView.as_view())
+    path("group/member", group_api.GroupMemberView.as_view()),
+
+    # SubScribeView
+    path("subscribe/tistory", tistory_subscribe_api.TistorySubscribeView.as_view())
+
 ]
