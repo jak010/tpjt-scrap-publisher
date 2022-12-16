@@ -1,3 +1,3 @@
 from .auth import Member
-from .scrap_model import TistoryModel
+from .group_subscribe import GroupSubScribe
 from .email_history import EmailHistory

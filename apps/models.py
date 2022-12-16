@@ -1,5 +1,5 @@
 from .orm import (
     Member,
-    TistoryModel,
+    GroupSubScribe,
     EmailHistory
 )

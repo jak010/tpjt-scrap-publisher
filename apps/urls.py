@@ -6,7 +6,6 @@ from .views import groups
 from .views import (
     member_api,
     email_send_api,
-    tistory_subscribe_api,
     sample_view
 )
 
@@ -27,8 +26,13 @@ urlpatterns = [
     path("group/create", groups.GroupCreateView.as_view()),
     path("group/<int:group_id>", groups.GroupDetailView.as_view()),
     path("group/<int:group_id>/member", groups.GroupMemberJoinView.as_view()),
+    path(
+        "group/<int:group_id>/subscribe",
+        groups.GroupSubscribeRegisterView.as_view(),
+        name='group_subscribe_register'
+    ),
 
     # SubScribeView
-    path("subscribe/tistory", tistory_subscribe_api.TistorySubscribeView.as_view()),
+    # path("subscribe/tistory", tistory_subscribe_api.TistorySubscribeView.as_view()),
     path("sample", sample_view.SampleView.as_view())
 ]

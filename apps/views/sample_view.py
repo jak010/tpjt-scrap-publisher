@@ -4,7 +4,7 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
-from ..orm import TistoryModel, Member
+from ..orm import Member
 
 
 class SampleView(View):
