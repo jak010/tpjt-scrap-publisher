@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import Group
-from ...orm import Member
+
+from ...orm import Member, GroupSubScribe
 
 
 class Command(BaseCommand):
@@ -21,6 +22,7 @@ class Command(BaseCommand):
             self.make_member()
             self.make_group()
             self.make_group_member()
+            self.make_group_subscribe()
 
     def make_member(self):
         for email in self.COMMON_EMAILS:
@@ -33,8 +35,20 @@ class Command(BaseCommand):
         g.save()
 
     def make_group_member(self):
-        g = Group.objects.get(name="test")
+        g = Group.objects.get(name=self.GROUP_NAME)
 
         for email in self.COMMON_EMAILS:
             m = Member.objects.get(email=email)
             m.groups.add(g)
+
+    def make_group_subscribe(self):
+        g = Group.objects.get(name=self.GROUP_NAME)
+
+        group_subscribe = GroupSubScribe.objects.create(
+            author="jakpentest",
+            sub_domain="jakpentest",
+            domain="tistory",
+            top_level_domain="com",
+            group=g
+        )
+        group_subscribe.save()
