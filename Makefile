@@ -16,3 +16,7 @@ run.test:
 
 run.db.container:
 	cd .dbcontainer && sudo docker-compose up -d
+
+
+run.app_setup.all:
+	$(VENV_PYTHON) manage.py app_setup all
