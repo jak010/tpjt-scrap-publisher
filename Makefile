@@ -13,3 +13,6 @@ run.local:
 
 run.test:
 	$(VENV_PYTHON) manage.py test $(APP_NAME)
+
+run.db.container:
+	cd .dbcontainer && sudo docker-compose up -d
