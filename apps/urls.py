@@ -1,15 +1,9 @@
-# from django.conf.urls import url  # django 4.x 버전 부터는 deprecated 처리
-
 from django.urls import path
 
 from .views import (
     groups,
-    members
-)
-
-from .views import (
-    email_send_api,
-    sample_view
+    members,
+    publish
 )
 
 app_name = "apps"
@@ -32,10 +26,7 @@ urlpatterns = [
         name='group_subscribe_register'
     ),
 
-    # SubScribeView
-    # path("subscribe/tistory", tistory_subscribe_api.TistorySubscribeView.as_view()),
-    path("sample", sample_view.SampleView.as_view()),
+    # Publish View
+    path("publish/email/groups/<int:group_id>", publish.EmailPublishOnGroupView.as_view()),
 
-    # Email Sender
-    path("email/send", email_send_api.EmailSendView.as_view()),
 ]
