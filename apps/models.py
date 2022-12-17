@@ -1,5 +1,6 @@
 from .orm import (
     Member,
     GroupSubScribe,
-    PublishHistory
+    PublishGroupHistory,
+    PublishMemberHistory
 )

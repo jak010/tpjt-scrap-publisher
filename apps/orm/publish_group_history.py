@@ -7,9 +7,9 @@ from .group_subscribe import GroupSubScribe
 member = get_user_model()
 
 
-class PublishHistory(models.Model):
+class PublishGroupHistory(models.Model):
     class Meta:
-        db_table = "publish_history"
+        db_table = "publish_group_history"
 
     reference_id = models.AutoField(primary_key=True)
 

@@ -1,1 +1,2 @@
 from .EmailPublishOnGroupView import EmailPublishOnGroupView
+from .EmailPublishOnMemberView import EmailPublishOnMemberView

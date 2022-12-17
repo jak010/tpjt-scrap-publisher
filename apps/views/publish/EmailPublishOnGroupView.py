@@ -3,7 +3,7 @@ from django.http.response import JsonResponse
 
 from django.contrib.auth.models import Group
 
-from apps.models import PublishHistory
+from apps.models import PublishGroupHistory
 from apps.orm import Member
 
 
@@ -24,7 +24,7 @@ class EmailPublishOnGroupView(View):
                 # TODO: Implementation
 
                 # Email Send History
-                publish_history = PublishHistory(
+                publish_history = PublishGroupHistory(
                     group=group,
                     member=group_member,
                     subscribe=group_subscribe

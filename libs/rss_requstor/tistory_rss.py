@@ -1,5 +1,6 @@
 from __future__ import annotations
 from . import BaseRss
+from typing import Generator, List
 
 
 class TistoryRss(BaseRss):
