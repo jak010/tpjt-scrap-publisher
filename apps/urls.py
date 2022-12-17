@@ -21,9 +21,6 @@ urlpatterns = [
     path("member/list", members.MemberListView.as_view(), name="member_list"),
     path("member/login", members.MemberLoginView.as_view(), name="member_login"),
 
-    # Email Sender
-    path("email/send", email_send_api.EmailSendView.as_view()),
-
     # Group View
     path("group/list", groups.GroupListView.as_view()),
     path("group/create", groups.GroupCreateView.as_view()),
@@ -37,5 +34,8 @@ urlpatterns = [
 
     # SubScribeView
     # path("subscribe/tistory", tistory_subscribe_api.TistorySubscribeView.as_view()),
-    path("sample", sample_view.SampleView.as_view())
+    path("sample", sample_view.SampleView.as_view()),
+
+    # Email Sender
+    path("email/send", email_send_api.EmailSendView.as_view()),
 ]
