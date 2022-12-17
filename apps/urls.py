@@ -2,9 +2,12 @@
 
 from django.urls import path
 
-from .views import groups
 from .views import (
-    member_api,
+    groups,
+    members
+)
+
+from .views import (
     email_send_api,
     sample_view
 )
@@ -14,9 +17,9 @@ app_name = "apps"
 urlpatterns = [
 
     # Member
-    path("member", member_api.MemberCreateView.as_view(), name="member_create"),
-    path("member/list", member_api.MemberListView.as_view(), name="member_list"),
-    path("member/login", member_api.MemberLoginView.as_view(), name="login"),
+    path("member", members.MemberCreateView.as_view(), name="member_create"),
+    path("member/list", members.MemberListView.as_view(), name="member_list"),
+    path("member/login", members.MemberLoginView.as_view(), name="member_login"),
 
     # Email Sender
     path("email/send", email_send_api.EmailSendView.as_view()),
