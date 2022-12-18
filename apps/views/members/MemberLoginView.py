@@ -1,21 +1,9 @@
-from django import forms
 from django.contrib.auth import authenticate, login
 from django.contrib.sessions.backends.db import SessionStore
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 
-
-class MemberLoginFormData(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField()
-
-    @property
-    def get_email(self):
-        return self.cleaned_data['email']
-
-    @property
-    def get_password(self):
-        return self.cleaned_data['password']
+from .dto import MemberLoginFormDto
 
 
 class MemberLoginView(View):
@@ -23,12 +11,12 @@ class MemberLoginView(View):
     def post(self, *args, **kwargs):
         """ Django Session 기반 유저 로그인 """
 
-        member_login_form_data = MemberLoginFormData(self.request.POST)
-        member_login_form_data.is_valid()
+        member_login_form_dto = MemberLoginFormDto(self.request.POST)
+        member_login_form_dto.is_valid()
 
         auth = authenticate(
-            username=member_login_form_data.get_email,
-            password=member_login_form_data.get_password
+            username=member_login_form_dto.get_email,
+            password=member_login_form_dto.get_password
         )
 
         if auth is None:
