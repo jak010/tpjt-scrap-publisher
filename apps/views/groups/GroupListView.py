@@ -13,8 +13,9 @@ class GroupListView(View):
 
         return JsonResponse(
             status=200,
-            data={'items': [{
-                'group_id': group.id,
-                'group_name': group.name
-            } for group in all_group]}
+            data={
+                'items': [{
+                    'group_id': group.id,
+                    'group_name': group.name
+                } for group in all_group]}
         )

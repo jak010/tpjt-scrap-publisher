@@ -1,8 +1,6 @@
 from django.contrib.auth.models import Group
+from django.http.response import JsonResponse
 from django.views import View
-
-from django.http.response import HttpResponse, JsonResponse
-from django.db import IntegrityError
 
 from ... import orm
 
