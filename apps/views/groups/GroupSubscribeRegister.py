@@ -4,6 +4,8 @@ from django.contrib.auth.models import Group
 
 from ... import orm
 
+from .dto.GroupSubScribeFormDto import GroupSubScribeFormDto
+
 
 class GroupSubscribeRegisterView(View):
 
@@ -11,18 +13,16 @@ class GroupSubscribeRegisterView(View):
         # Path Parameter
         group_id = self.kwargs['group_id']
 
-        # Request Body
-        author = self.request.POST.get('author', None)
-        sub_domain = self.request.POST.get("sub_domain", None)
-        domain = self.request.POST.get("domain", None)
-        top_level_domain = self.request.POST.get('top_level_domain', None)
+        group_subscribe_form_dto = GroupSubScribeFormDto(self.request.POST)
+        group_subscribe_form_dto.is_valid()
 
         group = Group.objects.get(pk=group_id)
+
         group_subscribe = orm.GroupSubScribe.objects.create(
-            author=author,
-            sub_domain=sub_domain,
-            domain=domain,
-            top_level_domain=top_level_domain,
+            author=group_subscribe_form_dto.get_author,
+            sub_domain=group_subscribe_form_dto.get_sub_domain,
+            domain=group_subscribe_form_dto.domain,
+            top_level_domain=group_subscribe_form_dto.get_top_level_domain,
             group=group
         )
         group_subscribe.save()
