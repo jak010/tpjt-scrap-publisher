@@ -7,7 +7,6 @@ from django.views import View
 from apps.models import PublishMemberHistory
 from apps.orm import Member
 from config.util import login_required
-
 from libs.rss_requstor.tistory_rss import TistoryRss, TistoryRssData
 
 

@@ -1,2 +1,2 @@
-from .EmailPublishOnGroupView import EmailPublishOnGroupView
-from .EmailPublishOnMemberView import EmailPublishOnMemberView
+from .email_publish_on_group import EmailPublishOnGroupView
+from .email_publish_on_member import EmailPublishOnMemberView
