@@ -16,7 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.http.response import HttpResponse
+
+
+def test():
+    return HttpResponse
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include("apps.urls"))  # apps url
+    path('api/', include("apps.urls")),  # apps url
+    path('', test)  # apps url
 ]

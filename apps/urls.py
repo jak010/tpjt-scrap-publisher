@@ -6,7 +6,15 @@ from .views import (
     publish
 )
 
+from django.http import HttpResponse
+
 app_name = "apps"
+
+
+def member_exception(request):
+    print(request)
+    return HttpResponse(status=200)
+
 
 urlpatterns = [
 
@@ -14,6 +22,7 @@ urlpatterns = [
     path("member", members.MemberCreateView.as_view(), name="member_create"),
     path("member/list", members.MemberListView.as_view(), name="member_list"),
     path("member/login", members.MemberLoginView.as_view(), name="member_login"),
+    path("member/exception", member_exception, name="member_exception"),
 
     # Group View
     path("group/list", groups.GroupListView.as_view()),
