@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
-
-from ..exceptions.member_exceptions import MemberLoginFailError
 from django.contrib.sessions.backends.db import SessionStore
+
+from ..exceptions.member_exceptions import MemberAuthenticateFailError
 
 
 class MemberAuthenticateService:
@@ -16,8 +16,7 @@ class MemberAuthenticateService:
             password=self._login_password
         )
 
-        if auth is None:
-            raise MemberLoginFailError
+        if auth is None: raise MemberAuthenticateFailError
 
         return auth
 
