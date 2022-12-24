@@ -5,10 +5,10 @@ from django.http import JsonResponse
 from django.views import View
 
 from .dto import MemberLoginFormDto
-from ...service.member_service import MemberAuthenticateService, MemberLoginService
-from ...service.status_handler import MemberServiceHttpExceptor
+from apps.layer.service.member_service import MemberAuthenticateService, MemberLoginService
+from apps.layer.service.status_handler import MemberServiceHttpExceptor
 
-from ...exceptions import member_exceptions
+from ...layer.exceptions import member_exceptions
 
 
 class MemberLoginView(View):
