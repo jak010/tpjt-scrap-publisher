@@ -19,8 +19,8 @@ from django.urls import path, include
 from django.http.response import HttpResponse
 
 
-def test():
-    return HttpResponse
+def test(request):
+    return HttpResponse(status=200, content="TEST CALL")
 
 
 urlpatterns = [
