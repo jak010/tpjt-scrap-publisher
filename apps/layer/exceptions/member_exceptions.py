@@ -15,3 +15,10 @@ class MemberLoginFailError(MemberAPIException):
     status_code = HTTPStatus.FORBIDDEN
     error = "MEMBER LOGIN FAIL"
     debug = "PLEASE CHECK IF YOU ARE LOGGED IN"
+
+
+class MemberDuplicateError(MemberAPIException):
+    """ 멤버 생성에 실패함 """
+    status_code = HTTPStatus.NOT_ACCEPTABLE
+    error = "ALREADY EXIST MEMBER"
+    debug = "PLEASE OTHER CREDENTIAL INPUT"

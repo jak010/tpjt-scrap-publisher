@@ -29,7 +29,7 @@ class MemberLoginView(View):
             login_password=member_login_form_dto.get_password
         )
 
-        member_session = member_service.member_session(
+        member_session = member_service.get_session(
             request=self.request,
             auth=member_authenticate
         )

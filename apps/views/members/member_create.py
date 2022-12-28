@@ -1,31 +1,31 @@
-from django.db import IntegrityError
 from django.http import JsonResponse
 from django.views import View
 
-from apps.orm import Member
+from apps.layer.service import member_service
 from .dto.MemberCreateDto import MemberCreateFormDto
+
+from apps.layer.exceptions.member_exceptions import MemberDuplicateError
+
+import backoff as check
 
 
 class MemberCreateView(View):
 
+    @check.on_exception(
+        check.expo,
+        raise_on_giveup=True, max_tries=1,
+        exception=(
+                MemberDuplicateError,
+        )
+    )
     def post(self, *args, **kwargs):
         """ 사용자 생성하기  """
         member_create_form_dto = MemberCreateFormDto(self.request.POST)
         member_create_form_dto.is_valid()
 
-        try:
-            new_member = Member(
-                email=member_create_form_dto.get_email,
-            )
-            new_member.set_password(member_create_form_dto.get_password)
-            new_member.save()
-        except IntegrityError:
-            return JsonResponse(
-                status=400,
-                data={
-                    "desg": "Already Exists Member"
-                }
-            )
+        new_member = member_service.create_member(
+            member_create_form_dto=member_create_form_dto
+        )
 
         return JsonResponse(status=201, data={
             "member_id": new_member.id
