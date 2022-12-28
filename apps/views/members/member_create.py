@@ -1,12 +1,10 @@
+import backoff as check
 from django.http import JsonResponse
 from django.views import View
 
+from apps.layer.exceptions.member_exceptions import MemberDuplicateError
 from apps.layer.service import member_service
 from .dto.MemberCreateDto import MemberCreateFormDto
-
-from apps.layer.exceptions.member_exceptions import MemberDuplicateError
-
-import backoff as check
 
 
 class MemberCreateView(View):
