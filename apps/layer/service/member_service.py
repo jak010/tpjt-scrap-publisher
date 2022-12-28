@@ -16,7 +16,6 @@ def member_authenticate(request, login_email: str, login_password: str):
         password=login_password
     )
 
-    print(auth)
     if auth is None: raise MemberAuthenticateFailError()
 
     login(request, auth)
