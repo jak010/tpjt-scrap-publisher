@@ -21,14 +21,14 @@ def member_authenticate(request, login_email: str, login_password: str):
     )
 
 
-def create_member(member_create_form_dto) -> Member:
+def create_member(email: str, password: str) -> Member:
     """ 사용자 생성하기 """
     try:
         with transaction.atomic():
             new_member = Member(
-                email=member_create_form_dto.get_email,
+                email=email,
             )
-            new_member.set_password(member_create_form_dto.get_password)
+            new_member.set_password(password)
             new_member.save()
 
             return new_member

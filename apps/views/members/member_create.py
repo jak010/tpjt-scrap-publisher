@@ -1,15 +1,14 @@
 from __future__ import annotations
 
+from http import HTTPStatus
 from typing import Union, Any
 
 from django.http import JsonResponse
 from django.views import View
 
-from apps.layer.exceptions import member_exceptions
+from apps.layer.exceptions import member_exceptions, BadRequestError
 from apps.layer.service import member_service
 from .dto.MemberCreateDto import MemberCreateFormDto
-
-from http import HTTPStatus
 
 
 class MemberCreateView(View):
@@ -22,10 +21,12 @@ class MemberCreateView(View):
     ]:
         """ 사용자 생성하기  """
         member_create_form_dto = MemberCreateFormDto(self.request.POST)
-        member_create_form_dto.is_valid()
+        if not member_create_form_dto.is_valid():
+            raise BadRequestError(member_create_form_dto.errors.get_json_data())  # XXX: 개선필요함
 
         new_member = member_service.create_member(
-            member_create_form_dto=member_create_form_dto
+            email=member_create_form_dto.get_email,
+            password=member_create_form_dto.get_password
         )
 
         return JsonResponse(

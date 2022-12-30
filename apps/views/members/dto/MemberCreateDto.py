@@ -2,8 +2,8 @@ from django import forms
 
 
 class MemberCreateFormDto(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField()
+    email = forms.EmailField(required=True)
+    password = forms.CharField(required=True)
 
     @property
     def get_email(self):
