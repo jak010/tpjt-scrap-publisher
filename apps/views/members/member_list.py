@@ -24,7 +24,7 @@ class MemberListView(View):
         } for member in members]
 
         return JsonResponse(
-            status=Success.OK,
+            status=Success.OK.value,
             data={
                 'items': items
             }

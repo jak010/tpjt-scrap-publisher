@@ -7,16 +7,17 @@ from django.views import View
 from apps.layer.exceptions import member_exceptions
 from apps.layer.service import member_service
 from config.response import Success
+from config.util import Exceptable
 from .dto import MemberLoginFormDto
 
 
 class MemberLoginView(View):
 
-    @check.on_exception(
-        check.expo, max_tries=1, raise_on_giveup=True,
-        exception=(
-                member_exceptions.MemberAuthenticateFailError,
-        )
+    @Exceptable(
+        expects=[
+            member_exceptions.MemberAuthenticateFailError,  # Credential을 잘못 입력한 경우
+            member_exceptions.MemberLoginFailError  # member의 active 상태가 0인 경우
+        ]
     )
     def post(self, *args, **kwargs):
         """ Django Session 기반 유저 로그인 """
@@ -36,7 +37,7 @@ class MemberLoginView(View):
         )
 
         return JsonResponse(
-            status=Success.OK,
+            status=Success.OK.value,
             data={
                 'session_key': member_session.session_key,
                 "expire_date": member_session.get_expiry_date()
