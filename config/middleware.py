@@ -1,4 +1,4 @@
-from apps.layer.exceptions import BaseAPIException
+from apps.layer.exceptions import BaseAPIException, BadRequestError
 
 
 class APIExceptionMiddleWare:
@@ -14,3 +14,6 @@ class APIExceptionMiddleWare:
         """ Exception Handler """
         if isinstance(exception, BaseAPIException):
             return exception()
+        if isinstance(exception, BadRequestError):
+            return BadRequestError(exception.message) \
+                .error_response()

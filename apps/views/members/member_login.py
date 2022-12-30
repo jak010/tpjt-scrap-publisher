@@ -1,29 +1,33 @@
 from __future__ import annotations
 
-import backoff as check
 from django.http import JsonResponse
 from django.views import View
 
-from apps.layer.exceptions import member_exceptions
+from apps.layer.exceptions import (
+    BadRequestError,
+    member_exceptions
+)
 from apps.layer.service import member_service
 from config.response import Success
-from config.util import Exceptable
+from config.util import ServiceExceptable
 from .dto import MemberLoginFormDto
 
 
 class MemberLoginView(View):
 
-    @Exceptable(
+    @ServiceExceptable(
         expects=[
             member_exceptions.MemberAuthenticateFailError,  # Credential을 잘못 입력한 경우
-            member_exceptions.MemberLoginFailError  # member의 active 상태가 0인 경우
+            member_exceptions.MemberLoginFailError,  # member의 active 상태가 0인 경우
+            BadRequestError
         ]
     )
     def post(self, *args, **kwargs):
         """ Django Session 기반 유저 로그인 """
 
         member_login_form_dto = MemberLoginFormDto(self.request.POST)
-        member_login_form_dto.is_valid()
+        if not member_login_form_dto.is_valid():
+            raise BadRequestError(member_login_form_dto.errors.get_json_data())  # XXX: 개선필요함
 
         member_authenticate = member_service.member_authenticate(
             request=self.request,

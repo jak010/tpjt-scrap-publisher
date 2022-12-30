@@ -3,13 +3,13 @@ from django.views import View
 
 from apps.layer.exceptions.member_exceptions import MemberDuplicateError
 from apps.layer.service import member_service
-from config.util import Exceptable
+from config.util import ServiceExceptable
 from .dto.MemberCreateDto import MemberCreateFormDto
 
 
 class MemberCreateView(View):
 
-    @Exceptable(expects=[
+    @ServiceExceptable(expects=[
         MemberDuplicateError
     ])
     def post(self, *args, **kwargs):

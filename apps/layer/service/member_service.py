@@ -1,8 +1,7 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 from django.contrib.sessions.backends.db import SessionStore
 from django.db import transaction, IntegrityError
 
-from apps.layer.exceptions.member_exceptions import MemberAuthenticateFailError
 from apps.layer.exceptions.member_exceptions import MemberDuplicateError
 from apps.orm import Member
 
@@ -14,16 +13,12 @@ def get_session(request, auth) -> SessionStore:
 
 def member_authenticate(request, login_email: str, login_password: str):
     """ 사용자 인증하기 """
-    auth = authenticate(
+
+    return authenticate(
+        request=request,
         username=login_email,
         password=login_password
     )
-
-    if auth is None: raise MemberAuthenticateFailError()
-
-    login(request, auth)
-
-    return auth
 
 
 def create_member(member_create_form_dto) -> Member:

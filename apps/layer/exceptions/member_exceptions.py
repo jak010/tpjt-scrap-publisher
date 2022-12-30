@@ -22,3 +22,26 @@ class MemberDuplicateError(MemberAPIException):
     status_code = HTTPStatus.NOT_ACCEPTABLE
     error = "ALREADY EXIST MEMBER"
     debug = "PLEASE OTHER CREDENTIAL INPUT"
+
+
+class MemberDoesNotExit(MemberAPIException):
+    """ 존재하지 않는 사용자 """
+    status_code = HTTPStatus.NOT_ACCEPTABLE
+    error = "Member Does Not Exist"
+    debug = "PLEASE OTHER EMAIL"
+
+
+class MemberPasswordNotMatched(MemberAPIException):
+    """ 패스워드가 일치하지 않음
+      Eg. Password 제한에 사용하기
+    """
+    status_code = HTTPStatus.NOT_ACCEPTABLE
+    error = "Member Password Does Not Matched"
+    debug = "PLEASE OTHER PASSWORD"
+
+
+class MemberDeActivateLogin(MemberAPIException):
+    """ 사용가의 로그인이 허용되지 않음"""
+    status_code = HTTPStatus.NOT_ACCEPTABLE
+    error = "DeActivate Member LOGIN"
+    debug = "BLOCK MEMBER"

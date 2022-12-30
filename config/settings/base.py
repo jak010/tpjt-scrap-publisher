@@ -94,6 +94,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "apps.Member"
+AUTHENTICATION_BACKENDS = (
+    'config.authenticate.AuthenticateBackend',
+)
 
 USE_TZ = True
 TIME_ZONE = 'Asia/Seoul'

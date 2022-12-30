@@ -6,7 +6,9 @@ import json
 from typing import Tuple, List, Type
 from functools import wraps
 
-from apps.layer.exceptions import MemberAPIException, BaseAPIException
+from apps.layer.exceptions import MemberAPIException, BaseAPIException, BadRequestError
+
+from django.core.exceptions import BadRequest
 
 api_exception_types = Type[BaseAPIException]
 
@@ -32,7 +34,7 @@ def login_required(view):
     return view_func
 
 
-class Exceptable:
+class ServiceExceptable:
     """ View에서 Exception 명시하기 """
 
     def __init__(self, expects: List[api_exception_types]):
@@ -47,8 +49,7 @@ class Exceptable:
                     if isinstance(exe, MemberAPIException):
                         raise self.exec
 
-            view = view_func(*args, **kwargs)
-            return view
+            return view_func(*args, **kwargs)
 
         return wrapper
 
