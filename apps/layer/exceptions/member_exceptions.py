@@ -17,10 +17,10 @@ class MemberLoginFailError(MemberAPIException):
     debug = "PLEASE CHECK IF YOU ARE LOGGED IN"
 
 
-class MemberDuplicateError(MemberAPIException):
+class MemberCreateFailError(MemberAPIException):
     """ 멤버 생성에 실패함 """
     status_code = HTTPStatus.NOT_ACCEPTABLE
-    error = "ALREADY EXIST MEMBER"
+    error = "MEMBER CREATE FAIL"
     debug = "PLEASE OTHER CREDENTIAL INPUT"
 
 

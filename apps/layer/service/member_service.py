@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.sessions.backends.db import SessionStore
 from django.db import transaction, IntegrityError
 
-from apps.layer.exceptions.member_exceptions import MemberDuplicateError
+from apps.layer.exceptions.member_exceptions import MemberCreateFailError
 from apps.orm import Member
 
 
@@ -33,4 +33,4 @@ def create_member(member_create_form_dto) -> Member:
 
             return new_member
     except IntegrityError:
-        raise MemberDuplicateError()
+        raise MemberCreateFailError()
