@@ -3,16 +3,6 @@ from __future__ import annotations
 from django.core.mail import EmailMessage
 
 
-# Email Publish
-# email_message = EmailMessage(
-#     subject=rss.get_title,
-#     body=rss.get_summary,
-#     to=[email_publish_on_member_dto.get_receiver]
-# )
-# email_message.content_subtype = "html"
-# result = email_message.send()
-
-
 class EmailSender:
 
     def __init__(self, subject, body, receviers: list[str], content_type="html"):

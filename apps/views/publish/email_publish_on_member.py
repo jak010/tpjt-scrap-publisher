@@ -7,7 +7,7 @@ from apps.layer.exceptions import BadRequestError
 from apps.models import PublishMemberHistory
 from config.util import login_required
 from libs.notify.email_sender import EmailSender
-from libs.rss_requstor.utils import get_rss
+from libs.rss_requstor.utils import rss_factory
 from .dto.email_publish_on_member_dto import EmailPublishOnMemberDto
 
 
@@ -21,7 +21,7 @@ class EmailPublishOnMemberView(View):
         if not email_publish_on_member_dto.is_valid():
             raise BadRequestError(email_publish_on_member_dto.errors.get_json_data())  # XXX: 개선필요함
 
-        rss = get_rss(email_publish_on_member_dto=email_publish_on_member_dto)
+        rss = rss_factory(email_publish_on_member_dto=email_publish_on_member_dto)
 
         try:
             # Email Publish
