@@ -24,3 +24,12 @@ class AuthenticateBackend(backends.BaseBackend):
         login(request, member)
 
         return member
+
+    def get_user(self, user_id):
+        """
+          Notes: Custom Authenticate 에서 이 method를 오버라이딩 안해주면 request.user에서 접근이 불가능함
+        """
+        try:
+            return Member.objects.get(id=user_id)  # <-- tried to get by email here
+        except Member.DoesNotExist:
+            return None

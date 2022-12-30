@@ -30,15 +30,14 @@ class MemberLoginView(View):
         if not member_login_form_dto.is_valid():
             raise BadRequestError(member_login_form_dto.errors.get_json_data())  # XXX: 개선필요함
 
-        member_authenticate = member_service.member_authenticate(
+        member_service.member_authenticate(
             request=self.request,
             login_email=member_login_form_dto.get_email,
             login_password=member_login_form_dto.get_password
         )
 
         member_session = member_service.get_session(
-            request=self.request,
-            auth=member_authenticate
+            request=self.request
         )
 
         return JsonResponse(

@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-from django.core.mail import EmailMessage
 from django.http.response import JsonResponse, HttpResponse
 from django.views import View
 
+from apps.layer.exceptions import BadRequestError
 from apps.models import PublishMemberHistory
-from apps.orm import Member
 from config.util import login_required
-from libs.rss_requstor.tistory_rss import TistoryRss, TistoryRssData
+from libs.notify.email_sender import EmailSender
+from libs.rss_requstor.utils import get_rss
+from .dto.email_publish_on_member_dto import EmailPublishOnMemberDto
 
 
 class EmailPublishOnMemberView(View):
@@ -15,33 +16,30 @@ class EmailPublishOnMemberView(View):
 
     @login_required
     def post(self, *args, **kwargs):
-        to_email = self.request.POST.get('to_email', None)
 
-        member = Member.objects.get(
-            email=self.request.user.email
-        )
+        email_publish_on_member_dto = EmailPublishOnMemberDto(self.request.POST)
+        if not email_publish_on_member_dto.is_valid():
+            raise BadRequestError(email_publish_on_member_dto.errors.get_json_data())  # XXX: 개선필요함
 
-        tistory_rss = TistoryRss(sub_domain="jakpentest")
-        rss = TistoryRssData(tistory_rss.get_entires[0])
+        rss = get_rss(email_publish_on_member_dto=email_publish_on_member_dto)
 
         try:
             # Email Publish
-            email_message = EmailMessage(
+            email_sender = EmailSender(
                 subject=rss.get_title,
                 body=rss.get_summary,
-                to=[to_email]
+                receviers=[email_publish_on_member_dto.get_receiver]
             )
-            email_message.content_subtype = "html"
-            result = email_message.send()
+            result = email_sender.publish()
 
             # Email Send History
             if result != 0:
                 publish_history = PublishMemberHistory(
-                    sender=member,
-                    receiver=to_email,
+                    sender=self.request.user,
+                    receiver=email_publish_on_member_dto.get_receiver,
                     title=rss.get_title,
                     content=rss.get_summary,
-                    description=tistory_rss.get_url
+                    description=rss.get_summary_detail
                 )
                 publish_history.save()
         except ConnectionError:

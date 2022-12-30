@@ -19,6 +19,7 @@ class UnAuthorizedResponse(HttpResponse):
 def login_required(view):
     def view_func(*args, **kwargs):
         view_object, wsgi_request = args
+
         if isinstance(view_object.request.user, AnonymousUser):
             return UnAuthorizedResponse()
 
