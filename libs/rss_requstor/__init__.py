@@ -21,3 +21,7 @@ class BaseRss:
     @property
     def get_entires(self) -> List[FeedParserDict]:
         return self._fetch['entries']
+
+    @property
+    def get_entires_first(self):
+        return self.get_entires[0]

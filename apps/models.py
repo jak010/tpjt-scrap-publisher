@@ -2,5 +2,6 @@ from .orm import (
     Member,
     GroupSubScribe,
     PublishGroupHistory,
-    PublishMemberHistory
+    PublishMemberHistory,
+    RecommandLink
 )
