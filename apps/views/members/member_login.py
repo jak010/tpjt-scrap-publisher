@@ -6,6 +6,7 @@ from django.views import View
 
 from apps.layer.exceptions import member_exceptions
 from apps.layer.service import member_service
+from config.response import Success
 from .dto import MemberLoginFormDto
 
 
@@ -34,7 +35,10 @@ class MemberLoginView(View):
             auth=member_authenticate
         )
 
-        return JsonResponse(status=200, data={
-            'session_key': member_session.session_key,
-            "expire_date": member_session.get_expiry_date()
-        })
+        return JsonResponse(
+            status=Success.OK,
+            data={
+                'session_key': member_session.session_key,
+                "expire_date": member_session.get_expiry_date()
+            }
+        )
