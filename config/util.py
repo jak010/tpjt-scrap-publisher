@@ -1,6 +1,14 @@
+from __future__ import annotations
 from django.contrib.auth.models import AnonymousUser
 from django.http.response import HttpResponse
 import json
+
+from typing import Tuple, List, Type
+from functools import wraps
+
+from apps.layer.exceptions import MemberAPIException, BaseAPIException
+
+api_exception_types = Type[BaseAPIException]
 
 
 class UnAuthorizedResponse(HttpResponse):
@@ -22,3 +30,27 @@ def login_required(view):
         return view(*args, **kwargs)
 
     return view_func
+
+
+class Exceptable:
+    """ View에서 Exception 명시하기 """
+
+    def __init__(self, expects: List[api_exception_types]):
+        self.exec = expects
+
+    def __call__(self, view_func):
+        @wraps(view_func)
+        def wrapper(*args, **kwargs):
+
+            if self.exec:
+                for exe in self.exec:
+                    if isinstance(exe, MemberAPIException):
+                        raise self.exec
+
+            view = view_func(*args, **kwargs)
+            return view
+
+        return wrapper
+
+    def notify(self):
+        raise NotImplementedError

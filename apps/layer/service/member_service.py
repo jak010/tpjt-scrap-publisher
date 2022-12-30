@@ -7,6 +7,11 @@ from apps.layer.exceptions.member_exceptions import MemberDuplicateError
 from apps.orm import Member
 
 
+def get_session(request, auth) -> SessionStore:
+    """ 사용자 session 찾기 """
+    return SessionStore(session_key=request.session.session_key)
+
+
 def member_authenticate(request, login_email: str, login_password: str):
     """ 사용자 인증하기 """
     auth = authenticate(
@@ -19,11 +24,6 @@ def member_authenticate(request, login_email: str, login_password: str):
     login(request, auth)
 
     return auth
-
-
-def get_session(request, auth) -> SessionStore:
-    """ 사용자 session 찾기 """
-    return SessionStore(session_key=request.session.session_key)
 
 
 def create_member(member_create_form_dto) -> Member:

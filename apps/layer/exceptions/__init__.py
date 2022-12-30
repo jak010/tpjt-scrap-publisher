@@ -21,4 +21,5 @@ class BaseAPIException(Exception):
 
 
 class MemberAPIException(BaseAPIException):
-    """ MEMBER API EXCEPTIOn """
+    """ MEMBER API EXCEPTION """
+
