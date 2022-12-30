@@ -5,6 +5,8 @@ from django.contrib.auth.models import Group
 class GroupSubScribe(models.Model):
     class Meta:
         db_table = "group_subscribe"
+        verbose_name = '그룹 구독'
+        verbose_name_plural = '그룹 구독'
 
     reference_id = models.AutoField(
         primary_key=True

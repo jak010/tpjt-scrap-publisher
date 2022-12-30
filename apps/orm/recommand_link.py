@@ -9,6 +9,8 @@ Member = get_user_model()
 class RecommandLink(models.Model):
     class Meta:
         db_table = "recommand_link"
+        verbose_name = '추천 링크 목록'
+        verbose_name_plural = '추천 링크 목록'
 
     reference_id = models.AutoField(
         primary_key=True

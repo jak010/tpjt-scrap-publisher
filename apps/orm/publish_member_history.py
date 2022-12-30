@@ -7,6 +7,8 @@ member = get_user_model()
 class PublishMemberHistory(models.Model):
     class Meta:
         db_table = "publish_member_history"
+        verbose_name = '이메일 전송 내역(멤버)'
+        verbose_name_plural = '이메일 전송 내역(멤버)'
 
     reference_id = models.AutoField(primary_key=True)
 

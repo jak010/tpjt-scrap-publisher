@@ -11,6 +11,8 @@ from django.utils.translation import gettext_lazy as _
 class Member(AbstractBaseUser, PermissionsMixin):
     class Meta:
         db_table = "member"
+        verbose_name = '사용자'
+        verbose_name_plural = '사용자'
 
     email = models.CharField(
         max_length=36,

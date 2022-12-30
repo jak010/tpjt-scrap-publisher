@@ -10,6 +10,8 @@ member = get_user_model()
 class PublishGroupHistory(models.Model):
     class Meta:
         db_table = "publish_group_history"
+        verbose_name = '이메일 전송 내역(그룹)'
+        verbose_name_plural = '이메일 전송 내역(그룹)'
 
     reference_id = models.AutoField(primary_key=True)
 
