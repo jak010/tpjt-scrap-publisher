@@ -8,9 +8,11 @@ from .models import (
     RecommandLink
 )
 
+from django.utils.translation import gettext as _
+
 
 # Register your models here.
-
+@admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Member', {'fields': [
@@ -26,7 +28,7 @@ class MemberAdmin(admin.ModelAdmin):
     ]
 
     list_display = (
-        'email',
+        _('email'),
         'last_login',
         'is_active',
         'is_staff',
@@ -35,8 +37,24 @@ class MemberAdmin(admin.ModelAdmin):
     search_fields = ['email']
 
 
-admin.site.register(Member, MemberAdmin)
+@admin.register(RecommandLink)
+class RecommandLinkAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Link', {'fields': [
+            'sub_domain', 'domain', 'top_level_domain'
+        ]}),
+        ('Score', {'fields': [
+            'rate', 'like', 'hit'
+        ]})
+    ]
+
+    list_display = (
+        'reference_id',
+        'sub_domain', 'domain', 'top_level_domain',
+        'rate', 'like', 'hit'
+    )
+
+
 admin.site.register(GroupSubScribe)
 admin.site.register(PublishGroupHistory)
 admin.site.register(PublishMemberHistory)
-admin.site.register(RecommandLink)

@@ -17,7 +17,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(
         max_length=36,
         unique=True,
-        verbose_name="user_email"
+        verbose_name="email"
     )
 
     password = models.CharField(_("password"), max_length=128)

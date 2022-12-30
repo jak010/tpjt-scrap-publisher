@@ -17,10 +17,10 @@ class RecommandLink(models.Model):
     )
     register = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
 
-    sub_domain = models.CharField(verbose_name='sub_domain', max_length=36)
+    sub_domain = models.CharField(verbose_name='sub domain', max_length=36)
     domain = models.CharField(verbose_name='domain', max_length=36)
-    top_level_domain = models.CharField(verbose_name='top_level_domain', max_length=36)
+    top_level_domain = models.CharField(verbose_name='top level domain', max_length=36)
 
     rate = models.IntegerField(verbose_name="rate")
     like = models.IntegerField(verbose_name="like")
-    hit = models.IntegerField(verbose_name="hit count")
+    hit = models.IntegerField(verbose_name="hit")
