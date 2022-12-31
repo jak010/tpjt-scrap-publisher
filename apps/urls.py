@@ -3,7 +3,8 @@ from django.urls import path
 from .views import (
     groups,
     members,
-    publish
+    publish,
+    sample_view
 )
 
 from django.http import HttpResponse
@@ -17,6 +18,8 @@ def member_exception(request):
 
 
 urlpatterns = [
+    # Sample
+    path("sample", sample_view.SampleView.as_view()),
 
     # Member
     path("member", members.MemberCreateView.as_view(), name="member_create"),

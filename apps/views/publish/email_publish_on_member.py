@@ -5,9 +5,11 @@ from django.views import View
 
 from apps.layer.exceptions import BadRequestError
 from config.util import login_required
-from libs.notify.email_sender import EmailSender
+from libs.announce.email_sender import EmailSender
 from libs.rss_requstor.utils import rss_factory
 from .dto.email_publish_on_member_dto import EmailPublishOnMemberDto
+
+from django.core.cache import cache
 
 
 class EmailPublishOnMemberView(View):
@@ -25,7 +27,8 @@ class EmailPublishOnMemberView(View):
             email_sender = EmailSender(
                 rss=rss,
                 sender=self.request.user,
-                receviers=[dto.get_receiver]
+                receviers=[dto.get_receiver],
+                with_cached=True
             )
             email_sender.publish()
         except ConnectionError:

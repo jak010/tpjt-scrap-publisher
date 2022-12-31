@@ -8,3 +8,13 @@ services:
     platform: linux/amd64  # mac에서 compose 할 경우 주석 해제 한 후 사용할 것
     build:
       context: .
+  redis:
+    image: redis:alpine
+    command: redis-server --port 6379
+    container_name: redis_boot
+    hostname: redis_boot
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    ports:
+      - "6379:6379"
