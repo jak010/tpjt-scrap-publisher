@@ -4,7 +4,7 @@ from django.http.response import JsonResponse
 from django.views import View
 
 from apps.models import PublishGroupHistory
-from libs.rss_requstor.tistory_rss import TistoryRss, TistoryRssData
+from libs.announce.rss.tistory_rss import TistoryRss, TistoryRssData
 
 
 class EmailPublishOnGroupView(View):

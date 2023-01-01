@@ -6,10 +6,8 @@ from django.views import View
 from apps.layer.exceptions import BadRequestError
 from config.util import login_required
 from libs.announce.email_sender import EmailSender
-from libs.rss_requstor.utils import rss_factory
+from libs.announce.utils import rss_factory
 from .dto.email_publish_on_member_dto import EmailPublishOnMemberDto
-
-from django.core.cache import cache
 
 
 class EmailPublishOnMemberView(View):
