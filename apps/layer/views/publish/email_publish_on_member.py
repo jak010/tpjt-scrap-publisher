@@ -20,11 +20,14 @@ class EmailPublishOnMemberView(View):
             raise BadRequestError(dto.errors.get_json_data())
 
         announce_email_sevice = AnnounceEmailService(dto=dto)
-        announce_email_sevice.publish(
+
+        result = announce_email_sevice.publish(
             sender=self.request.user,
-            with_schedule=True
         )
 
-        return JsonResponse(status=201, data={
-            "desg": "Success", 'data': dto.get_receiver
-        })
+        return JsonResponse(
+            status=201,
+            data={
+                'message': result
+            }
+        )

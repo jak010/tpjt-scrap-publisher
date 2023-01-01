@@ -3,7 +3,8 @@ from django.views import View
 
 # from django.contrib.auth.decorators import login_required
 
-from libs.redis_container import RedisList
+
+from libs.wrapper.redis import RedisList
 from libs.constant import CacheKey
 
 

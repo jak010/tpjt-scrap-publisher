@@ -1,26 +1,11 @@
 from __future__ import annotations
 
-from functools import cached_property
-
-from django_redis import get_redis_connection
-from django_redis.client import DefaultClient
 from libs.constant import CacheKey
 
-from django.core.cache import cache
+from .context import RedisContext
 
 
-class RedisContainer:
-    """ Redis Container """
-
-    def __init__(self, cache_key: CacheKey):
-        self.cache_key = cache_key.value
-
-    @property
-    def rcon(self):
-        return get_redis_connection("default")
-
-
-class RedisList(RedisContainer):
+class RedisList(RedisContext):
     """ Redis List Data Structure """
 
     def __init__(self, cache_key: CacheKey):
