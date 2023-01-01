@@ -3,7 +3,7 @@ from django.http.response import JsonResponse
 from django.views import View
 
 from .dto.GroupSubScribeFormDto import GroupSubScribeFormDto
-from ... import orm
+from apps import orm
 
 
 class GroupSubscribeRegisterView(View):

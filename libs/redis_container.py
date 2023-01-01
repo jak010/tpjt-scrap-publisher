@@ -3,42 +3,42 @@ from __future__ import annotations
 from functools import cached_property
 
 from django_redis import get_redis_connection
-
+from django_redis.client import DefaultClient
 from libs.constant import CacheKey
+
+from django.core.cache import cache
 
 
 class RedisContainer:
     """ Redis Container """
 
-    def __init__(self, cache_key: CacheKey, name="default"):
+    def __init__(self, cache_key: CacheKey):
         self.cache_key = cache_key.value
-        self.name = name
 
-    @cached_property
+    @property
     def rcon(self):
-        return get_redis_connection(self.name)
+        return get_redis_connection("default")
 
 
 class RedisList(RedisContainer):
     """ Redis List Data Structure """
 
-    def __init__(self, cache_key: CacheKey, name="default"):
+    def __init__(self, cache_key: CacheKey):
         super(RedisList, self).__init__(
             cache_key=cache_key,
-            name=name
         )
 
-    def append(self, value):
-        self.rcon.lpush(self.cache_key, value)
+    def lpush(self, value):
+        return self.rcon.lpush(self.cache_key, value)
 
-    def pop(self):
+    def lpop(self):
         return self.rcon.lpop(self.cache_key)
 
-    def get_all(self):
+    def lrange(self):
         return self.rcon.lrange(self.cache_key, 0, -1)
 
     def size(self):
-        return len(self.get_all())
+        return len(self.lrange())
 
     def __str__(self):
         return self.rcon.get(self.cache_key)

@@ -2,7 +2,7 @@ from django.contrib.auth.models import Group
 from django.http.response import JsonResponse
 from django.views import View
 
-from ... import orm
+from apps import orm
 
 
 class GroupMemberJoinView(View):

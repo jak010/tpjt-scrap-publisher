@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import (
+from apps.layer.views import (
     groups,
     members,
     publish,

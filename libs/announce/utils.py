@@ -9,7 +9,7 @@ from .rss.tistory_rss import TistoryRss, TistoryRssData
 from .. import constant
 
 if TYPE_CHECKING:
-    from apps.views.publish.dto.email_publish_on_member_dto import EmailPublishOnMemberDto
+    from apps.layer.views.publish.dto.email_publish_on_member_dto import EmailPublishOnMemberDto
 
 
 def deserialized_email(email_messages: list[bytes]) -> list[EmailMessage]:
