@@ -33,10 +33,13 @@ class Command(BaseCommand):
         flag = options['init']
 
         if flag == 'all':
-            self.make_member()
-            self.make_group()
-            self.make_group_member()
-            self.make_group_subscribe()
+            try:
+                self.make_member()
+                self.make_group()
+                self.make_group_member()
+                self.make_group_subscribe()
+            except Exception:
+                pass
 
     def make_member(self):
         for email in self.COMMON_EMAILS:

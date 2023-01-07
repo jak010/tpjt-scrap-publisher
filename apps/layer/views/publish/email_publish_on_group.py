@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 from django.contrib.auth.models import Group
 from django.core.mail import EmailMessage
 from django.http.response import JsonResponse
 from django.views import View
 
 from apps.models import PublishGroupHistory
-from libs.announce.rss.tistory_rss import TistoryRss, TistoryRssData
+from libs.rss.tistory import TistoryRss, TistoryRssData
 
 
 class EmailPublishOnGroupView(View):

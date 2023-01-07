@@ -7,7 +7,7 @@ from libs.announce.email import (
     EmailMessage,
     EmailSender
 )
-from libs.announce.utils import rss_factory
+from libs.rss.factory import rss_factory
 
 if TYPE_CHECKING:
     from apps.layer.views.publish.dto.email_publish_on_member_dto import EmailPublishOnMemberDto
@@ -17,9 +17,7 @@ class AnnounceEmailService:
 
     def __init__(self, dto: EmailPublishOnMemberDto):
         self._dto = dto
-        self._rss = rss_factory(
-            email_publish_on_member_dto=dto
-        )
+        self._rss = rss_factory(domain=dto.get_domain)
 
     def publish(self, sender):
         """ Email Direct Send """

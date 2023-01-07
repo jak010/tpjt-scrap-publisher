@@ -2,11 +2,11 @@ from django import forms
 
 
 class GroupSubScribeFormDto(forms.Form):
-    author = forms.CharField(max_length=12)
+    author = forms.CharField(max_length=12, required=True)
 
-    sub_domain = forms.CharField(max_length=12)
-    domain = forms.CharField(max_length=12)
-    top_level_domain = forms.CharField(max_length=12)
+    sub_domain = forms.CharField(max_length=12, required=True)
+    domain = forms.CharField(max_length=12, required=True)
+    top_level_domain = forms.CharField(max_length=12, required=True)
 
     @property
     def get_author(self):

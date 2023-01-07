@@ -11,15 +11,14 @@ class GroupSubscribeRegisterViewTest(unittest.TestCase):
         self.data = {
             "author": "jakpentest",
             "sub_domain": "jakpentest",
-            "domain": "tistory",
+            "domain": "tistory_test",
             "top_level_domain": "com"
-
         }
 
     def test_group_subscribe_register_view(self):
         client = Client()
 
-        url = reverse("apps:group_subscribe_register", kwargs={"group_id": 2})
+        url = reverse("apps:group_subscribe_register", kwargs={"group_id": 1})
 
         response = client.post(url, data=self.data)
 
@@ -27,5 +26,5 @@ class GroupSubscribeRegisterViewTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        test_set = GroupSubScribe.objects.get(author="jakpentest")
+        test_set = GroupSubScribe.objects.get(domain='tistory_test')
         test_set.delete()

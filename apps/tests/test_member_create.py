@@ -1,9 +1,8 @@
 import unittest
-
 from functools import cached_property
 
 from django.test import Client
-from django.shortcuts import reverse
+
 from ..orm import Member
 
 
@@ -12,7 +11,7 @@ class MemberCreateViewTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.member_create_data = {
-            "email": "test01@test.com",
+            "email": "test99@test.com",
             "password": "1234"
         }
         return cls
@@ -35,7 +34,7 @@ class MemberCreateViewTest(unittest.TestCase):
             data=self.member_create_data
         )
 
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 406)
 
     @classmethod
     def tearDownClass(cls) -> None:

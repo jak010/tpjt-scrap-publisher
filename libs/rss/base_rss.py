@@ -6,20 +6,20 @@ from typing import List
 from feedparser import FeedParserDict
 
 
-class BaseRss(metaclass=abc.ABCMeta):
+class BaseRss(abc.ABCMeta):
 
-    @abc.abstractmethod
     @property
+    @abc.abstractmethod
     def get_url(self): ...
 
-    @abc.abstractmethod
     @property
-    def _fetch(self) -> FeedParserDict: ...
+    @abc.abstractmethod
+    def get_feed(self) -> FeedParserDict: ...
 
-    @abc.abstractmethod
     @property
+    @abc.abstractmethod
     def get_entires(self) -> List[FeedParserDict]: ...
 
-    @abc.abstractmethod
     @property
+    @abc.abstractmethod
     def get_entires_first(self): ...
