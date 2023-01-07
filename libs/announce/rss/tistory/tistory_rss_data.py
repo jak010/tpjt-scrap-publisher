@@ -1,16 +1,6 @@
 from __future__ import annotations
-from . import BaseRss
-from typing import Generator, List
 
-
-class TistoryRss(BaseRss):
-
-    def __init__(self, sub_domain):
-        super(TistoryRss, self).__init__(
-            sub_domain=sub_domain,
-            domain="tistory",
-            top_level_domain="com"
-        )
+from .sub_data.summary_detail import SummaryDetail
 
 
 class TistoryRssData:
@@ -75,20 +65,3 @@ class TistoryRssData:
     @property
     def get_title_detail(self):
         return self.entry['title_detail']
-
-
-class SummaryDetail:
-    def __init__(self, summary_detail):
-        self.summary_detail = summary_detail
-
-    @property
-    def base(self):
-        return self.summary_detail['base']
-
-    @property
-    def language(self):
-        return self.summary_detail['lanugae']
-
-    @property
-    def value(self):
-        return self.summary_detail['value']
