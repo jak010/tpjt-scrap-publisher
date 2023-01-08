@@ -17,7 +17,7 @@ class AnnounceEmailService:
 
     def __init__(self, dto: EmailPublishOnMemberDto):
         self._dto = dto
-        self._rss = rss_factory(domain=dto.get_domain)
+        self._rss = rss_factory(domain=dto.get_domain, sub_domain=dto.get_sub_domain)
 
     def publish(self, sender):
         """ Email Direct Send """
@@ -42,7 +42,7 @@ class AnnounceEmailService:
     def _get_email_message(self) -> EmailMessage:
         return EmailMessage(
             email_subject=self._dto.get_subject,
-            email_content_title=self._rss.get_title,
-            email_content_body=self._rss.get_summary,
+            email_content_title=self._rss.get_entires_first.get_title,
+            email_content_body=self._rss.get_entires_first.get_summary,
             receviers=self._dto.get_receiver
         )

@@ -40,5 +40,8 @@ urlpatterns = [
 
     # Publish View
     path("publish/email/group/<int:group_id>", publish.EmailPublishOnGroupView.as_view()),
-    path("publish/email/member", publish.EmailPublishOnMemberView.as_view()),
+    path("publish/email/member",
+         publish.EmailPublishOnMemberView.as_view(),
+         name="publish_email_on_member"
+         ),
 ]

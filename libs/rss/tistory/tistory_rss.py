@@ -31,8 +31,8 @@ class TistoryRss(metaclass=BaseRss):
         return self.get_feed['entries']
 
     @property
-    def get_entires_first(self):
-        return self.get_entires[0]
+    def get_entires_first(self) -> TistoryRssData:
+        return TistoryRssData(self.get_entires[0])
 
     def get_all_entry(self) -> List[TistoryRssData]:
         return [

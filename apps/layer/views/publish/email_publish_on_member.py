@@ -22,7 +22,7 @@ class EmailPublishOnMemberView(View):
         announce_email_sevice = AnnounceEmailService(dto=dto)
 
         result = announce_email_sevice.publish(
-            sender=self.request.user,
+            sender=self.request.user
         )
 
         return JsonResponse(
