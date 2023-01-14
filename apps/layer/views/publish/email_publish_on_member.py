@@ -2,10 +2,14 @@ from __future__ import annotations
 
 from django.http.response import JsonResponse
 from django.views import View
+from libs.announce.email.send_box import EmailSendBox
 
 from apps.layer.exceptions import BadRequestError
-from apps.layer.service.announce_service import AnnounceEmailService
 from config.util import login_required
+from libs.announce.email import (
+    EmailMessage
+)
+from libs.rss.factory import rss_factory
 from .dto.email_publish_on_member_dto import EmailPublishOnMemberDto
 
 
@@ -19,11 +23,18 @@ class EmailPublishOnMemberView(View):
         if not dto.is_valid():
             raise BadRequestError(dto.errors.get_json_data())
 
-        announce_email_sevice = AnnounceEmailService(dto=dto)
+        rss = rss_factory(domain=dto.get_domain, sub_domain=dto.get_sub_domain)
 
-        result = announce_email_sevice.publish(
-            sender=self.request.user
+        email_send_box = EmailSendBox(
+            sender=self.request.user,
+            email_message=EmailMessage(
+                email_subject=dto.get_subject,
+                email_content_title=rss.get_entires_first.get_title,
+                email_content_body=rss.get_entires_first.get_summary,
+                receviers=dto.get_receiver
+            )
         )
+        result = email_send_box.publish()
 
         return JsonResponse(
             status=201,

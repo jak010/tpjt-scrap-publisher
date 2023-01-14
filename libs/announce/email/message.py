@@ -15,7 +15,11 @@ class EmailMessage:
         self._email_content_title = email_content_title
         self._email_content_body = email_content_body
 
-        self.receivers = receviers
+        self._receivers = receviers
+
+    @property
+    def email_subjecty(self):
+        return self.email_subject
 
     @property
     def content_title(self):
@@ -25,11 +29,15 @@ class EmailMessage:
     def content_body(self):
         return self._email_content_body + "\n\n"
 
+    @property
+    def receivers(self):
+        return self._receivers
+
     def send(self) -> int:
         email_message = _EmailMessage(
             subject=self.email_subject,
             body=self.content_title + self._email_content_body,
-            to=self.receivers
+            to=self._receivers
         )
         email_message.content_subtype = "html"
 
