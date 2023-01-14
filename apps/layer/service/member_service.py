@@ -35,3 +35,20 @@ def create_member(email: str, password: str) -> Member:
             return new_member
     except IntegrityError:
         raise MemberCreateFailError()
+
+
+# XXX: 더 고민해보자.
+def get_members():
+    """ 모든 사용자 정보 가져오기 """
+    return [{
+        'member_id': member.id,
+        'email': member.email,
+        'last_login': member.last_login,
+        'date_of_join': member.date_of_join,
+        'is_active': member.is_active,
+        'groups': [{
+            'group_id': group.id,
+            'name': group.name
+        } for group in member.groups.all()]
+    } for member in Member.objects.all() \
+        .prefetch_related('groups')]
