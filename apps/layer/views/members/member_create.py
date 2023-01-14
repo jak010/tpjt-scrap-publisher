@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from http import HTTPStatus
-from typing import Union, Any
+from typing import Union
 
 from django.http import JsonResponse
 from django.views import View
@@ -15,9 +15,7 @@ class MemberCreateView(View):
 
     def post(self, *args, **kwargs) -> Union[
         JsonResponse,
-        Any[
-            member_exceptions.MemberCreateFail
-        ]
+        member_exceptions.MemberCreateFail
     ]:
         """ 사용자 생성하기  """
         member_create_form_dto = MemberCreateFormDto(self.request.POST)
