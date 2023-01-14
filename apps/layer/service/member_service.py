@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.sessions.backends.db import SessionStore
 from django.db import transaction, IntegrityError
 
-from apps.layer.exceptions.member_exceptions import MemberCreateFailError
+from apps.layer.exceptions.member_exceptions import MemberCreateFail
 from apps.orm import Member
 
 
@@ -34,7 +34,7 @@ def create_member(email: str, password: str) -> Member:
 
             return new_member
     except IntegrityError:
-        raise MemberCreateFailError()
+        raise MemberCreateFail()
 
 
 # XXX: 더 고민해보자.

@@ -16,7 +16,7 @@ class MemberCreateView(View):
     def post(self, *args, **kwargs) -> Union[
         JsonResponse,
         Any[
-            member_exceptions.MemberCreateFailError
+            member_exceptions.MemberCreateFail
         ]
     ]:
         """ 사용자 생성하기  """

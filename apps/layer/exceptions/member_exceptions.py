@@ -3,21 +3,21 @@ from http import HTTPStatus
 from . import MemberAPIException
 
 
-class MemberAuthenticateFailError(MemberAPIException):
+class MemberAuthenticateFail(MemberAPIException):
     """ 인증에 실패함 """
     status_code = HTTPStatus.UNAUTHORIZED
     error = "MEMBER AUTHENTICATE FAIL"
     debug = "CHECK ON LOGIN_ID or LOGIN_PASSWORD"
 
 
-class MemberLoginFailError(MemberAPIException):
+class MemberLoginFail(MemberAPIException):
     """ 로그인에 실패함 """
     status_code = HTTPStatus.FORBIDDEN
     error = "MEMBER LOGIN FAIL"
     debug = "PLEASE CHECK IF YOU ARE LOGGED IN"
 
 
-class MemberCreateFailError(MemberAPIException):
+class MemberCreateFail(MemberAPIException):
     """ 멤버 생성에 실패함 """
     status_code = HTTPStatus.NOT_ACCEPTABLE
     error = "MEMBER CREATE FAIL"
