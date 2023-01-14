@@ -1,5 +1,5 @@
 
-VENV_PYTHON=$(PWD)/venv/bin/python3
+VENV_PYTHON=$(which) python
 
 HOST=0.0.0.0
 PORT=8000
