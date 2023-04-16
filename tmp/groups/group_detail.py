@@ -15,7 +15,7 @@ class GroupDetailView(View):
         return JsonResponse(status=200, data={
             'group_id': group.id,
             'group_name': group.name,
-            'members': [{
+            'member': [{
                 'member_id': member.id,
                 'email': member.email
             } for member in group_members],

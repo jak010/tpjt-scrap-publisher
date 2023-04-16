@@ -26,13 +26,16 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'apps.member',
+
+    'django_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -45,15 +48,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'config.middleware.APIExceptionMiddleWare',
+    # 'config.middleware.APIExceptionMiddleWare',
 ]
 
 ROOT_URLCONF = 'config.urls'
 
+print(str(BASE_DIR.parent) + "/templates")
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR.parent) + "/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,7 +101,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "apps.Member"
 AUTHENTICATION_BACKENDS = (
     'config.authenticate.AuthenticateBackend',
 )

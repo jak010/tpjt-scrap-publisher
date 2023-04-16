@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.contrib.sessions.backends.db import SessionStore
 from django.db import transaction, IntegrityError
 
-from apps.layer.exceptions.member_exceptions import MemberCreateFail
-from apps.orm import Member
+Member = get_user_model()
 
 
 def get_session(request) -> SessionStore:
@@ -26,15 +25,13 @@ def create_member(email: str, password: str) -> Member:
     """ 사용자 생성하기 """
     try:
         with transaction.atomic():
-            new_member = Member(
-                email=email,
-            )
+            new_member = Member(email=email)
             new_member.set_password(password)
             new_member.save()
 
             return new_member
     except IntegrityError:
-        raise MemberCreateFail()
+        raise Exception("Member Create Fail")
 
 
 # XXX: 더 고민해보자.

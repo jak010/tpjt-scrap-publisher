@@ -18,13 +18,18 @@ from django.urls import path, include
 
 from django.http.response import HttpResponse
 
+from django.shortcuts import render
 
-def test(request):
-    return HttpResponse(status=200, content="TEST CALL")
+
+def home(request):
+    return render(request, "home.html", {
+        "description": "ScrapPublish App"
+    })
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include("apps.urls")),  # apps url
-    path('', test)  # apps url
+    # path('admin/', admin.site.urls),
+    path('home', home),  # apps url
+    # path('members', include("apps.member.urls")),  # apps url
+
 ]

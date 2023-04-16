@@ -4,7 +4,7 @@ from django.http.response import JsonResponse
 from django.views import View
 from libs.announce.email.send_box import EmailSendBox
 
-from apps.layer.exceptions import BadRequestError
+from apps.member.exceptions import BadRequestError
 from config.util import login_required
 from libs.announce.email import (
     EmailMessage
