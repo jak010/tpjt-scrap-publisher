@@ -41,3 +41,33 @@ class Member(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
 
     REQUIRED_FIELDS = []
+
+
+class MemberInvitation:
+    class Meta:
+        db_table = "member_invitation"
+        verbose_name = '사용자 초대 링크'
+
+    email = models.CharField(
+        max_length=36,
+        unique=True,
+        verbose_name="email"
+    )
+    invitation_code = models.CharField(
+        max_length=255,
+        unique=True,
+        verbose_name="email_verify_code",
+        null=False
+    )
+
+    exp_time = models.DateTimeField(
+        verbose_name="iat_time",
+        blank=False,
+        null=False
+    )
+
+    send_time = models.DateTimeField(
+        verbose_name="iat_time",
+        blank=False,
+        null=False
+    )
