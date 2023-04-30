@@ -13,12 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from django.shortcuts import render, redirect
 from django.urls import path, include
-
-from django.http.response import HttpResponse
-
-from django.shortcuts import render
 
 
 def home(request):
@@ -29,7 +25,9 @@ def home(request):
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('home', home),  # apps url
+
+    path("", lambda x: redirect("home")),
+    path('home', home, name="home"),  # apps url
     path('members', include("apps.member.urls")),  # apps url
 
 ]

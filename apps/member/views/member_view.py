@@ -1,12 +1,12 @@
-from django.http import JsonResponse
-from django.views import View
-
-from django.views.generic import TemplateView
+from __future__ import annotations
 
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.views import View
+from django.views.generic import TemplateView
 
-from apps.member.form import MemberCreateForm
-
+from apps.member.form import MemberCreateForm, MemberLoginForm
 from ..service import member_service
 
 Member = get_user_model()
@@ -22,10 +22,39 @@ class MemberCreateView(TemplateView):
 
     def post(self, request):
         form = MemberCreateForm(request.POST)
+
         if form.is_valid():
-            member_service.create_member(
+            result = member_service.create_member(
                 email=form.cleaned_data['email'],
                 password=form.cleaned_data['password']
             )
+            if result is not None:
+                return self.render_to_response(context={
+                    "result": 'error',
+                    "message": result,
+                })
+            return redirect('apps:member_login')
+
+        return self.render_to_response(context={})
+
+
+class MemberLoginView(TemplateView):
+    template_name = "src/member/login.html"
+
+    def post(self, request):
+        form = MemberLoginForm(request.POST)
+
+        if form.is_valid():
+            result = member_service.login(
+                request=self.request,
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password']
+            )
+            if result is not None:
+                return self.render_to_response(context={
+                    'result': 'error',
+                    'message': result
+                })
+            return redirect('index')
 
         return self.render_to_response(context={})

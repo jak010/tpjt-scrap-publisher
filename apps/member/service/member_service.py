@@ -12,26 +12,24 @@ def get_session(request) -> SessionStore:
     return SessionStore(session_key=request.session.session_key)
 
 
-def member_authenticate(request, login_email: str, login_password: str) -> Member:
+def login(request, email: str, password: str) -> Member:
     """ 사용자 인증하기 """
     return authenticate(
         request=request,
-        username=login_email,
-        password=login_password
+        username=email,
+        password=password
     )
 
 
-def create_member(email: str, password: str) -> Member:
+def create_member(email: str, password: str) -> bool:
     """ 사용자 생성하기 """
     try:
         with transaction.atomic():
             new_member = Member(email=email)
             new_member.set_password(password)
             new_member.save()
-
-            return new_member
-    except IntegrityError:
-        raise Exception("Member Create Fail")
+    except IntegrityError as e:
+        return e.args
 
 
 # XXX: 더 고민해보자.
