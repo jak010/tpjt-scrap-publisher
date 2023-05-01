@@ -29,7 +29,7 @@ urlpatterns = [
     path("", MemberListView.as_view(), name="member_list"),
     path("/create", views.member_view.MemberCreateView.as_view(), name="member_create"),
 
-    path("/login", views.member_view.MemberLoginView.as_view(), name="member_login")
+    path("/login", views.member_view.MemberLoginView.as_view(), name="member_login"),
 
     # path("member", MemberCreateView.as_view(), name="member_create"),
     # path("member/list", MemberListView.as_view(), name="member_list"),

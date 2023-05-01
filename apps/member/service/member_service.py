@@ -7,6 +7,14 @@ from django.db import transaction, IntegrityError
 Member = get_user_model()
 
 
+class MemberDuplicateError(Exception):
+    """ Member가 중복됨 """
+
+
+class MemberEmailAlreadyExistError(Exception):
+    """ Email이 존재함 """
+
+
 def get_session(request) -> SessionStore:
     """ 사용자 session 찾기 """
     return SessionStore(session_key=request.session.session_key)
@@ -14,25 +22,21 @@ def get_session(request) -> SessionStore:
 
 def login(request, email: str, password: str) -> Member:
     """ 사용자 인증하기 """
-    return authenticate(
-        request=request,
-        username=email,
-        password=password
-    )
+    return authenticate(request=request, username=email, password=password)
 
 
-def create_member(email: str, password: str) -> bool:
+def create_member(email: str, password: str):
     """ 사용자 생성하기 """
-    try:
-        with transaction.atomic():
-            new_member = Member(email=email)
-            new_member.set_password(password)
-            new_member.save()
-    except IntegrityError as e:
-        return e.args
+    member = Member.objects.filter(email=email).first()
+    if member:
+        raise MemberEmailAlreadyExistError()
+
+    with transaction.atomic():
+        new_member = Member(email=email)
+        new_member.set_password(password)
+        new_member.save()
 
 
-# XXX: 더 고민해보자.
 def get_members():
     """ 모든 사용자 정보 가져오기 """
     return [{

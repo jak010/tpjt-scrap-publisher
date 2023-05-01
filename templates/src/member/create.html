@@ -11,11 +11,6 @@
 <div class="container">
     <form name="member_create_form" method="POST" action=" {% url 'apps:member_create' %} ">
         {% csrf_token %}
-
-        {% if result == 'error' %}
-            <p>{{ message }}</p>
-        {% endif%}
-
         <div class="form-group d-flex justify-content-center">
             <div class="col-6">
                 <label for="email" class="form-label">Email</label>
@@ -29,11 +24,20 @@
         <div class="form-group d-flex justify-content-center">
             <div class="col-6">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="password">
+                <input type="password" name="password" class="form-control" id="password" placeholder="password">
 
             </div>
         </div>
         <br>
+        <div class="form-group d-flex justify-content-center">
+            {% if messages %}
+            <div class="col-6 alert alert-danger d-flex justify-content-center" role="alert">
+                {% for message in messages %}
+                {{ message.message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         <div class="gap-2 d-flex justify-content-center">
             <a href="{% url 'home' %}" class="btn btn-outline-dark btn-lg" type="button" tabindex="-1" role="button"
                aria-disabled="true">
@@ -42,12 +46,8 @@
             <button class="btn btn-outline-dark btn-lg" type="submit" tabindex="-1" role="button" aria-disabled="true">
                 SUBMIT
             </button>
-
-
         </div>
     </form>
 
 
 </div>
-
-

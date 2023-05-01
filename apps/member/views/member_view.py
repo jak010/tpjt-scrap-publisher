@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from django.contrib import messages
 from django.contrib.auth import get_user_model
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import TemplateView
@@ -23,17 +24,17 @@ class MemberCreateView(TemplateView):
     def post(self, request):
         form = MemberCreateForm(request.POST)
 
-        if form.is_valid():
-            result = member_service.create_member(
+        if not form.is_valid():
+            return HttpResponseRedirect(request.path)
+
+        try:
+            member_service.create_member(
                 email=form.cleaned_data['email'],
                 password=form.cleaned_data['password']
             )
-            if result is not None:
-                return self.render_to_response(context={
-                    "result": 'error',
-                    "message": result,
-                })
-            return redirect('apps:member_login')
+
+        except member_service.MemberEmailAlreadyExistError:
+            messages.error(request, "이미 존재하는 사용자입니다. 다시 입력해주세요")
 
         return self.render_to_response(context={})
 
