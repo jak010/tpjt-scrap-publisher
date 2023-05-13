@@ -19,7 +19,7 @@ class MemberListView(View):
 
 
 class MemberCreateView(TemplateView):
-    template_name = "src/member/create.html"
+    template_name = "src/member/signup.html"
 
     def post(self, request):
         form = MemberCreateForm(request.POST)
