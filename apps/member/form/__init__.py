@@ -25,5 +25,19 @@ class MemberSignUpForm(forms.Form):
 
 
 class MemberLoginForm(forms.Form):
-    email = forms.EmailField(max_length=255)
-    password = forms.CharField(max_length=255)
+    email = forms.EmailField(
+        max_length=255,
+        label="Email",
+        widget=forms.EmailInput(attrs={
+            "placeholder": "Eemail Input Here",
+        })
+
+    )
+
+    password = forms.CharField(
+        max_length=255,
+        label="Password",
+        widget=forms.PasswordInput(attrs={
+            'placeholder': "Password input",
+        })
+    )

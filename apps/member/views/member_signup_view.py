@@ -33,4 +33,4 @@ class MemberCreateView(TemplateView):
             messages.error(request, "이미 존재하는 사용자입니다. 다시 입력해주세요")
             return self.render_to_response(context={'form': MemberSignUpForm()})
 
-        return HttpResponseRedirect("login")
+        return HttpResponseRedirect("src/member/index.html")

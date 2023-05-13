@@ -53,8 +53,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-print(str(BASE_DIR.parent) + "/templates")
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

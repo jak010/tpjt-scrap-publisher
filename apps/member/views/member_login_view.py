@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from django.shortcuts import redirect
+from django.contrib import messages
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 
 from apps.member.form import MemberLoginForm
@@ -10,20 +12,28 @@ from apps.member.service import member_service
 class MemberLoginView(TemplateView):
     template_name = "src/member/login.html"
 
+    def get(self, *args, **kwargs):
+        return self.render_to_response(
+            context={'form': MemberLoginForm()}
+        )
+
     def post(self, request):
         form = MemberLoginForm(request.POST)
+        if not form.is_valid():
+            return self.render_to_response(context={'form': MemberLoginForm()})
 
-        if form.is_valid():
-            result = member_service.login(
+        try:
+            member_service.login(
                 request=self.request,
                 email=form.cleaned_data['email'],
                 password=form.cleaned_data['password']
             )
-            if result is not None:
-                return self.render_to_response(context={
-                    'result': 'error',
-                    'message': result
+        except PermissionDenied:
+            messages.error(request, "Permission Denined")
+            return self.render_to_response(
+                context={
+                    'form': MemberLoginForm(),
+                    'message': 'Login Failed'
                 })
-            return redirect('index')
 
-        return self.render_to_response(context={})
+        return HttpResponseRedirect('/home')

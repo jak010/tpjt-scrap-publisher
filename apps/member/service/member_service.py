@@ -2,13 +2,10 @@ from __future__ import annotations
 
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.sessions.backends.db import SessionStore
-from django.db import transaction, IntegrityError
+from django.core.exceptions import PermissionDenied
+from django.db import transaction
 
 Member = get_user_model()
-
-
-class MemberDuplicateError(Exception):
-    """ Member가 중복됨 """
 
 
 class MemberEmailAlreadyExistError(Exception):
@@ -22,7 +19,11 @@ def get_session(request) -> SessionStore:
 
 def login(request, email: str, password: str) -> Member:
     """ 사용자 인증하기 """
-    return authenticate(request=request, username=email, password=password)
+    member = authenticate(request=request, username=email, password=password)
+    if member:
+        return member
+
+    raise PermissionDenied()
 
 
 def create_member(email: str, password: str):
