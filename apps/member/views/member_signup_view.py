@@ -14,11 +14,9 @@ class MemberCreateView(TemplateView):
     template_name = "src/member/signup.html"
 
     def get(self, *args, **kwargs):
-        form = MemberSignUpForm()
-        print(form)
-        return self.render_to_response(context={
-            'form': form
-        })
+        return self.render_to_response(
+            context={'form': MemberSignUpForm()}
+        )
 
     def post(self, request):
         form = MemberSignUpForm(request.POST)
@@ -33,5 +31,6 @@ class MemberCreateView(TemplateView):
             )
         except member_service.MemberEmailAlreadyExistError:
             messages.error(request, "이미 존재하는 사용자입니다. 다시 입력해주세요")
+            return self.render_to_response(context={'form': MemberSignUpForm()})
 
-        return self.render_to_response(self.get())
+        return HttpResponseRedirect("login")

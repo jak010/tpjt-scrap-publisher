@@ -10,9 +10,21 @@
 
 <div class="d-flex justify-content-center">
 
+
     <form class="form-inline w-50" name="member_create_form" method="POST" action=" {% url 'apps:member_create' %} ">
         {% csrf_token %}
+        <div class="form-group d-flex justify-content-center">
+            {% if messages %}
+            <div class="alert alert-danger d-flex justify-content-center" role="alert">
+                {% for message in messages %}
+                {{ message.message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
         {% bootstrap_form form %}
+
 
         <div class="gap-2 d-flex justify-content-center">
             <a href="{% url 'home' %}" class="btn btn-outline-dark btn-lg" type="button" tabindex="-1" role="button"
