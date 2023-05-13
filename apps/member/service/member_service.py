@@ -28,6 +28,7 @@ def login(request, email: str, password: str) -> Member:
 def create_member(email: str, password: str):
     """ 사용자 생성하기 """
     member = Member.objects.filter(email=email).first()
+
     if member:
         raise MemberEmailAlreadyExistError()
 

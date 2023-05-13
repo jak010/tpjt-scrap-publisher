@@ -1,5 +1,7 @@
 from django.urls import path
 
+import apps.member.views.member_login_view
+import apps.member.views.member_signup_view
 from apps import member
 
 from django.http import HttpResponse
@@ -27,9 +29,9 @@ urlpatterns = [
 
     # Member
     path("", MemberListView.as_view(), name="member_list"),
-    path("/create", views.member_view.MemberCreateView.as_view(), name="member_create"),
+    path("/create", apps.member.views.member_signup_view.MemberCreateView.as_view(), name="member_create"),
 
-    path("/login", views.member_view.MemberLoginView.as_view(), name="member_login"),
+    path("/login", apps.member.views.member_login_view.MemberLoginView.as_view(), name="member_login"),
 
     # path("member", MemberCreateView.as_view(), name="member_create"),
     # path("member/list", MemberListView.as_view(), name="member_list"),
