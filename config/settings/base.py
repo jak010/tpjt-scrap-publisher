@@ -24,7 +24,6 @@ SECRET_KEY = 'ehf^qq7bc7%*d=omt0r#^(1a(78i=*9hy4m=l8@b67z62a*i4q'
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,10 +32,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_bootstrap5',
 
     'apps.member',
-
-    'django_bootstrap5'
+    'apps.groups',
 ]
 
 MIDDLEWARE = [
