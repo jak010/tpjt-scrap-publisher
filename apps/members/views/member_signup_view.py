@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 
-from apps.member.form import MemberSignUpForm
-from apps.member.service import member_service
+from apps.members.form import MemberSignUpForm
+from apps.members.service import member_service
 
 
 class MemberCreateView(TemplateView):

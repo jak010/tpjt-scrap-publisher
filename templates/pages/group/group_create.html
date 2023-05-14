@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load django_bootstrap5 %}
+
+<div class="py-5 text-center">
+    <h2> Group / Register</h2>
+</div>
+
+<div class="d-flex justify-content-center">
+
+    <form class="form-inline w-50" name="group_create_form" method="POST" action=" {% url 'group:create' %} ">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+        <br>
+
+        <div class="gap-2 d-flex justify-content-center">
+            <a href="{% url 'home' %}" class="btn btn-outline-dark btn-lg" type="button" tabindex="-1" role="button"
+               aria-disabled="true">
+                CANCEL
+            </a>
+            <button class="btn btn-outline-dark btn-lg" type="submit" tabindex="-1" role="button" aria-disabled="true">
+                SUBMIT
+            </button>
+        </div>
+
+    </form>
+
+
+</div>
+{% endblock %}
+
+
+
+

@@ -1,17 +1,16 @@
 {% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 <html lang="en">
 
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+
 {% include "layout/header.html" %}
 
-{% block content%}
 <body>
-
-
-</body>
+{% block content%}
 
 {% endblock %}
+</body>
 
 </html>

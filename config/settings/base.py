@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_bootstrap5',
 
-    'apps.member',
+    'apps.members',
     'apps.groups',
 ]
 

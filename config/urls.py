@@ -28,6 +28,7 @@ urlpatterns = [
 
     path("", lambda x: redirect("home")),
     path('home', home, name="home"),  # apps url
-    path('members/', include("apps.member.urls")),  # apps url
+    path('members/', include("apps.members.urls")),  # apps url
+    path('groups/', include("apps.groups.urls")),  # apps url
 
 ]

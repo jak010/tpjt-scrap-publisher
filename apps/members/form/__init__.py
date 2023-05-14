@@ -12,7 +12,6 @@ class MemberSignUpForm(forms.Form):
         widget=forms.EmailInput(attrs={
             "placeholder": "Eemail Input Here",
         })
-
     )
 
     password = forms.CharField(

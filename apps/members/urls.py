@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from django.urls import path
 
-from apps.member.views import (
+from apps.members.views import (
     member_view,
     member_login_view,
     member_signup_view,
