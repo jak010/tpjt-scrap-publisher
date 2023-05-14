@@ -36,4 +36,4 @@ class MemberLoginView(TemplateView):
                     'message': 'Login Failed'
                 })
 
-        return HttpResponseRedirect('/home')
+        return HttpResponseRedirect('/members/profile')

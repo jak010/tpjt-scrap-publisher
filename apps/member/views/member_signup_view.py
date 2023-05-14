@@ -7,8 +7,6 @@ from django.views.generic import TemplateView
 from apps.member.form import MemberSignUpForm
 from apps.member.service import member_service
 
-from django.shortcuts import render
-
 
 class MemberCreateView(TemplateView):
     template_name = "src/member/signup.html"

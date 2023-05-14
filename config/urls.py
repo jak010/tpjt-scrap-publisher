@@ -18,7 +18,7 @@ from django.urls import path, include
 
 
 def home(request):
-    return render(request, "home.html", {
+    return render(request, "pages/home.html", {
         "description": "ScrapPublish App"
     })
 
@@ -28,6 +28,6 @@ urlpatterns = [
 
     path("", lambda x: redirect("home")),
     path('home', home, name="home"),  # apps url
-    path('members', include("apps.member.urls")),  # apps url
+    path('members/', include("apps.member.urls")),  # apps url
 
 ]
